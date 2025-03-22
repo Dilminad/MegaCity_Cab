@@ -1,0 +1,123 @@
+import React from 'react';
+import { Search, Filter } from 'lucide-react';
+
+const rides = [
+  {
+    id: "1",
+    customer: "John Doe",
+    driver: "Mike Smith",
+    from: "Downtown",
+    to: "Airport",
+    status: "Active",
+    amount: "$25",
+  },
+  {
+    id: "2",
+    customer: "Jane Smith",
+    driver: "David Wilson",
+    from: "Mall",
+    to: "Station",
+    status: "Completed",
+    amount: "$18",
+  },
+  {
+    id: "3",
+    customer: "Alice Brown",
+    driver: "Tom Davis",
+    from: "Beach",
+    to: "Hotel",
+    status: "Cancelled",
+    amount: "$30",
+  },
+];
+
+const RidesPage = () => {
+  return (
+    <div className="p-6 mt-16">
+      <div className="mb-6 flex justify-between items-center">
+        <h1 className="text-2xl font-semibold">Rides Management</h1>
+        <div className="flex space-x-4">
+          <div className="relative">
+            <Search
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              size={20}
+            />
+            <input
+              type="text"
+              placeholder="Search rides..."
+              className="pl-10 pr-4 py-2 border rounded-lg w-64"
+            />
+          </div>
+          <button className="flex items-center space-x-2 px-4 py-2 border rounded-lg hover:bg-gray-50">
+            <Filter size={20} />
+            <span>Filter</span>
+          </button>
+        </div>
+      </div>
+      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">
+                ID
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">
+                Customer
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">
+                Driver
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">
+                From
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">
+                To
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">
+                Amount
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {rides.map((ride) => (
+              <tr key={ride.id}>
+                <td className="px-6 py-4 text-sm">#{ride.id}</td>
+                <td className="px-6 py-4 text-sm">{ride.customer}</td>
+                <td className="px-6 py-4 text-sm">{ride.driver}</td>
+                <td className="px-6 py-4 text-sm">{ride.from}</td>
+                <td className="px-6 py-4 text-sm">{ride.to}</td>
+                <td className="px-6 py-4 text-sm">{ride.amount}</td>
+                <td className="px-6 py-4 text-sm">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs ${
+                      ride.status === "Active"
+                        ? "bg-green-100 text-green-600"
+                        : ride.status === "Completed"
+                        ? "bg-blue-100 text-blue-600"
+                        : "bg-red-100 text-red-600"
+                    }`}
+                  >
+                    {ride.status}
+                  </span>
+                </td>
+                <td className="px-6 py-4 text-sm">
+                  <button className="text-blue-600 hover:text-blue-800">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+export default RidesPage;
